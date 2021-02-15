@@ -22,8 +22,10 @@ jobs:
       - get: concourse-examples
         trigger: true
         passed: [set-self]
-      - set_pipeline: ssun3-set-pipelines-hello-world
-        file: concourse-examples/hello-world.yml
+      #- set_pipeline: ssun3-set-pipelines-hello-world
+      #  file: concourse-examples/hello-world.yml
+      - set_pipeline: ssun3-set-pipelines-time-triggered
+        file: concourse-examples/time-triggered.yml
     # - set_pipeline: instance-groups
     #   file: concourse-examples/pipelines/pipeline-vars.yml
     #   # instance_vars is currently experimental and requires the feature flag
