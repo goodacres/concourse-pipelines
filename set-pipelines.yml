@@ -1,0 +1,34 @@
+---
+resources:
+  - name: concourse-examples
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/godacre/concourse-trigger
+      branch: main
+
+jobs:
+  # update this pipeline before updating child pipelines
+  - name: set-self
+    public: true
+    plan:
+      - get: concourse-examples
+        trigger: true
+      - set_pipeline: set-pipelines
+        file: concourse-examples/set-pipelines.yml
+  - name: set-example-pipelines
+    public: true
+    plan:
+      - get: concourse-examples
+        trigger: true
+        passed: [set-self]
+      - set_pipeline: job
+        file: concourse-examples/hello-world.yml
+    # - set_pipeline: instance-groups
+    #   file: concourse-examples/pipelines/pipeline-vars.yml
+    #   # instance_vars is currently experimental and requires the feature flag
+    #   # --enable-pipeline-instances
+    #   instance_vars:
+    #     first: initial
+    #     number: "9000"
+    #     hello: HAL
