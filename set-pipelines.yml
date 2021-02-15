@@ -14,7 +14,7 @@ jobs:
     plan:
       - get: concourse-examples
         trigger: true
-      - set_pipeline: set-pipelines
+      - set_pipeline: ssun3-set-pipelines-example
         file: concourse-examples/set-pipelines.yml
   - name: set-example-pipelines
     public: true
@@ -22,7 +22,7 @@ jobs:
       - get: concourse-examples
         trigger: true
         passed: [set-self]
-      - set_pipeline: job
+      - set_pipeline: ssun3-set-pipelines-hello-world
         file: concourse-examples/hello-world.yml
     # - set_pipeline: instance-groups
     #   file: concourse-examples/pipelines/pipeline-vars.yml
